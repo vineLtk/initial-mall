@@ -174,127 +174,127 @@ elseif ($_REQUEST['act'] == 'main')
     /* 检查文件目录属性 */
     $warning = array();
 
-    if ($_CFG['shop_closed'])
-    {
-        $warning[] = $_LANG['shop_closed_tips'];
-    }
+    // if ($_CFG['shop_closed'])
+    // {
+    //     $warning[] = $_LANG['shop_closed_tips'];
+    // }
 
-    if (file_exists('../install'))
-    {
-        $warning[] = $_LANG['remove_install'];
-    }
+    // if (file_exists('../install'))
+    // {
+    //     $warning[] = $_LANG['remove_install'];
+    // }
 
-    if (file_exists('../upgrade'))
-    {
-        $warning[] = $_LANG['remove_upgrade'];
-    }
+    // if (file_exists('../upgrade'))
+    // {
+    //     $warning[] = $_LANG['remove_upgrade'];
+    // }
     
-    if (file_exists('../demo'))
-    {
-        $warning[] = $_LANG['remove_demo'];
-    }
+    // if (file_exists('../demo'))
+    // {
+    //     $warning[] = $_LANG['remove_demo'];
+    // }
 
-    $open_basedir = ini_get('open_basedir');
-    if (!empty($open_basedir))
-    {
-        /* 如果 open_basedir 不为空，则检查是否包含了 upload_tmp_dir  */
-        $open_basedir = str_replace(array("\\", "\\\\"), array("/", "/"), $open_basedir);
-        $upload_tmp_dir = ini_get('upload_tmp_dir');
+    // $open_basedir = ini_get('open_basedir');
+    // if (!empty($open_basedir))
+    // {
+    //     /* 如果 open_basedir 不为空，则检查是否包含了 upload_tmp_dir  */
+    //     $open_basedir = str_replace(array("\\", "\\\\"), array("/", "/"), $open_basedir);
+    //     $upload_tmp_dir = ini_get('upload_tmp_dir');
 
-        if (empty($upload_tmp_dir))
-        {
-            if (stristr(PHP_OS, 'win'))
-            {
-                $upload_tmp_dir = getenv('TEMP') ? getenv('TEMP') : getenv('TMP');
-                $upload_tmp_dir = str_replace(array("\\", "\\\\"), array("/", "/"), $upload_tmp_dir);
-            }
-            else
-            {
-                $upload_tmp_dir = getenv('TMPDIR') === false ? '/tmp' : getenv('TMPDIR');
-            }
-        }
+    //     if (empty($upload_tmp_dir))
+    //     {
+    //         if (stristr(PHP_OS, 'win'))
+    //         {
+    //             $upload_tmp_dir = getenv('TEMP') ? getenv('TEMP') : getenv('TMP');
+    //             $upload_tmp_dir = str_replace(array("\\", "\\\\"), array("/", "/"), $upload_tmp_dir);
+    //         }
+    //         else
+    //         {
+    //             $upload_tmp_dir = getenv('TMPDIR') === false ? '/tmp' : getenv('TMPDIR');
+    //         }
+    //     }
 
-        if (!stristr($open_basedir, $upload_tmp_dir))
-        {
-            $warning[] = sprintf($_LANG['temp_dir_cannt_read'], $upload_tmp_dir);
-        }
-    }
+    //     if (!stristr($open_basedir, $upload_tmp_dir))
+    //     {
+    //         $warning[] = sprintf($_LANG['temp_dir_cannt_read'], $upload_tmp_dir);
+    //     }
+    // }
 
-    $result = file_mode_info('../cert');
-    if ($result < 2)
-    {
-        $warning[] = sprintf($_LANG['not_writable'], 'cert', $_LANG['cert_cannt_write']);
-    }
+    // $result = file_mode_info('../cert');
+    // if ($result < 2)
+    // {
+    //     $warning[] = sprintf($_LANG['not_writable'], 'cert', $_LANG['cert_cannt_write']);
+    // }
 
-    $result = file_mode_info('../' . DATA_DIR);
-    if ($result < 2)
-    {
-        $warning[] = sprintf($_LANG['not_writable'], 'data', $_LANG['data_cannt_write']);
-    }
-    else
-    {
-        $result = file_mode_info('../' . DATA_DIR . '/afficheimg');
-        if ($result < 2)
-        {
-            $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/afficheimg', $_LANG['afficheimg_cannt_write']);
-        }
+    // $result = file_mode_info('../' . DATA_DIR);
+    // if ($result < 2)
+    // {
+    //     $warning[] = sprintf($_LANG['not_writable'], 'data', $_LANG['data_cannt_write']);
+    // }
+    // else
+    // {
+    //     $result = file_mode_info('../' . DATA_DIR . '/afficheimg');
+    //     if ($result < 2)
+    //     {
+    //         $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/afficheimg', $_LANG['afficheimg_cannt_write']);
+    //     }
 
-        $result = file_mode_info('../' . DATA_DIR . '/brandlogo');
-        if ($result < 2)
-        {
-            $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/brandlogo', $_LANG['brandlogo_cannt_write']);
-        }
+    //     $result = file_mode_info('../' . DATA_DIR . '/brandlogo');
+    //     if ($result < 2)
+    //     {
+    //         $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/brandlogo', $_LANG['brandlogo_cannt_write']);
+    //     }
 
-        $result = file_mode_info('../' . DATA_DIR . '/cardimg');
-        if ($result < 2)
-        {
-            $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/cardimg', $_LANG['cardimg_cannt_write']);
-        }
+    //     $result = file_mode_info('../' . DATA_DIR . '/cardimg');
+    //     if ($result < 2)
+    //     {
+    //         $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/cardimg', $_LANG['cardimg_cannt_write']);
+    //     }
 
-        $result = file_mode_info('../' . DATA_DIR . '/feedbackimg');
-        if ($result < 2)
-        {
-            $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/feedbackimg', $_LANG['feedbackimg_cannt_write']);
-        }
+    //     $result = file_mode_info('../' . DATA_DIR . '/feedbackimg');
+    //     if ($result < 2)
+    //     {
+    //         $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/feedbackimg', $_LANG['feedbackimg_cannt_write']);
+    //     }
 
-        $result = file_mode_info('../' . DATA_DIR . '/packimg');
-        if ($result < 2)
-        {
-            $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/packimg', $_LANG['packimg_cannt_write']);
-        }
-    }
+    //     $result = file_mode_info('../' . DATA_DIR . '/packimg');
+    //     if ($result < 2)
+    //     {
+    //         $warning[] = sprintf($_LANG['not_writable'], DATA_DIR . '/packimg', $_LANG['packimg_cannt_write']);
+    //     }
+    // }
 
-    $result = file_mode_info('../images');
-    if ($result < 2)
-    {
-        $warning[] = sprintf($_LANG['not_writable'], 'images', $_LANG['images_cannt_write']);
-    }
-    else
-    {
-        $result = file_mode_info('../' . IMAGE_DIR . '/upload');
-        if ($result < 2)
-        {
-            $warning[] = sprintf($_LANG['not_writable'], IMAGE_DIR . '/upload', $_LANG['imagesupload_cannt_write']);
-        }
-    }
+    // $result = file_mode_info('../images');
+    // if ($result < 2)
+    // {
+    //     $warning[] = sprintf($_LANG['not_writable'], 'images', $_LANG['images_cannt_write']);
+    // }
+    // else
+    // {
+    //     $result = file_mode_info('../' . IMAGE_DIR . '/upload');
+    //     if ($result < 2)
+    //     {
+    //         $warning[] = sprintf($_LANG['not_writable'], IMAGE_DIR . '/upload', $_LANG['imagesupload_cannt_write']);
+    //     }
+    // }
 
-    $result = file_mode_info('../temp');
-    if ($result < 2)
-    {
-        $warning[] = sprintf($_LANG['not_writable'], 'images', $_LANG['tpl_cannt_write']);
-    }
+    // $result = file_mode_info('../temp');
+    // if ($result < 2)
+    // {
+    //     $warning[] = sprintf($_LANG['not_writable'], 'images', $_LANG['tpl_cannt_write']);
+    // }
 
-    $result = file_mode_info('../temp/backup');
-    if ($result < 2)
-    {
-        $warning[] = sprintf($_LANG['not_writable'], 'images', $_LANG['tpl_backup_cannt_write']);
-    }
+    // $result = file_mode_info('../temp/backup');
+    // if ($result < 2)
+    // {
+    //     $warning[] = sprintf($_LANG['not_writable'], 'images', $_LANG['tpl_backup_cannt_write']);
+    // }
 
-    if (!is_writeable('../' . DATA_DIR . '/order_print.html'))
-    {
-        $warning[] = $_LANG['order_print_canntwrite'];
-    }
-    clearstatcache();
+    // if (!is_writeable('../' . DATA_DIR . '/order_print.html'))
+    // {
+    //     $warning[] = $_LANG['order_print_canntwrite'];
+    // }
+    // clearstatcache();
 
     $smarty->assign('warning_arr', $warning);
     
